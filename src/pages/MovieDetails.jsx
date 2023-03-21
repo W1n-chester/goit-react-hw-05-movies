@@ -1,6 +1,6 @@
 import { BackLink } from 'components/BackLink/BackLink';
 import { useEffect, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import { fetchMovieInfo } from 'services/SearchMovieInfo';
 
 const MovieDetails = () => {
@@ -19,15 +19,23 @@ const MovieDetails = () => {
 const backLinkHref = location.state?.from ?? "/";
   return (
     <>
-          <h3>xxxxxx</h3>
-          <BackLink to={backLinkHref}>Back</BackLink>
-      <img width={200}
+      <h3>xxxxxx</h3>
+      <BackLink to={backLinkHref}>Back</BackLink>
+      <img
+        width={200}
         src={`https://image.tmdb.org/t/p/w500${info.poster_path}`}
         alt="poster"
       />
       <p>{info.original_title}</p>
       <p>{`User Score${info.vote_average}`}</p>
-     
+      <h3>Additional information</h3>
+      <p>
+        <Link to="cast">Cast</Link>
+      </p>
+      <p>
+        <Link to="reviews">Reviews</Link>
+      </p>
+      <Outlet/>
     </>
   );
 };
