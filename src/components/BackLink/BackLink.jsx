@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
 
+import { Back } from './BackLink.styled';
 export const BackLink = ({ to, children }) => {
-  return <Link to={to}>{children}</Link>;
+  return <Back to={to}>{children}</Back>;
 };

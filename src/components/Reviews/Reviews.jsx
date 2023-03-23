@@ -11,12 +11,25 @@ const Reviews = () => {
         console.log(data.results);
       })
       .catch(err => console.log(err));
-    
   }, [movieId]);
   console.log(reviewsData);
   return (
     <>
       <p>REVIEWS</p>
+      {reviewsData.length
+        ? (
+        <ul>
+          {reviewsData.map(review => (
+            <li key={review.id}>
+              <h3>Author: {review.author}</h3>
+              <p>{review.content}</p>
+            </li>
+          ))}
+        </ul>
+      )
+        : (
+        <h3>We donn`t any reviews for this movie.</h3>
+      )}
     </>
   );
 };

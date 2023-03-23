@@ -2,32 +2,45 @@ import { BackLink } from 'components/BackLink/BackLink';
 import { useEffect, useState } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import { fetchMovieInfo } from 'services/SearchMovieInfo';
+import { FilmStand, Title, P, SubTitle } from './MoveDetails.styled';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
   const [info, setInfo] = useState({});
 
   useEffect(() => {
-      fetchMovieInfo(movieId)
-        .then(data => {
-          console.log(data);
-          setInfo(data);
-        })
-        .catch(err => console.log(err));
+    fetchMovieInfo(movieId)
+      .then(data => {
+        console.log(data);
+        setInfo(data);
+      })
+      .catch(err => console.log(err));
   }, [movieId]);
-    const location = useLocation()
-const backLinkHref = location.state?.from ?? "/";
+
+  const location = useLocation();
+  const backLinkHref = location.state?.from ?? '/';
+
   return (
     <>
-      <h3>xxxxxx</h3>
       <BackLink to={backLinkHref}>Back</BackLink>
-      <img
-        width={200}
-        src={`https://image.tmdb.org/t/p/w500${info.poster_path}`}
-        alt="poster"
-      />
-      <p>{info.original_title}</p>
-      <p>{`User Score${info.vote_average}`}</p>
+      <FilmStand>
+        <img
+          src={`https://image.tmdb.org/t/p/w500${info.poster_path}`}
+          alt="poster"
+          width="300px"
+          height="440px"
+        />
+        <div>
+          <Title>{info.original_title}</Title>
+          <P>{`User Score: ${(info.vote_average * 10).toFixed(1)}%`}</P>
+          <SubTitle>Overview</SubTitle>
+          <P>{info.overview}</P>
+          <SubTitle>Geners</SubTitle>
+          <P>{  info.genres
+                  ? info.genres.map(genre => genre.name + ' ')
+                  : 'no genre'}</P>
+        </div>
+      </FilmStand>
       <h3>Additional information</h3>
       <p>
         <Link to="cast">Cast</Link>
@@ -35,7 +48,8 @@ const backLinkHref = location.state?.from ?? "/";
       <p>
         <Link to="reviews">Reviews</Link>
       </p>
-      <Outlet/>
+
+      <Outlet />
     </>
   );
 };
