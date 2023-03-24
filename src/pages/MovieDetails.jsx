@@ -11,7 +11,7 @@ const MovieDetails = () => {
   useEffect(() => {
     fetchMovieInfo(movieId)
       .then(data => {
-        console.log(data);
+        // console.log(data);
         setInfo(data);
       })
       .catch(err => console.log(err));
@@ -36,17 +36,23 @@ const MovieDetails = () => {
           <SubTitle>Overview</SubTitle>
           <P>{info.overview}</P>
           <SubTitle>Geners</SubTitle>
-          <P>{  info.genres
-                  ? info.genres.map(genre => genre.name + ' ')
-                  : 'no genre'}</P>
+          <P>
+            {info.genres
+              ? info.genres.map(genre => genre.name + ' ')
+              : 'no genre'}
+          </P>
         </div>
       </FilmStand>
       <h3>Additional information</h3>
       <p>
-        <Link to="cast">Cast</Link>
+        <Link to="cast" state={{ from: backLinkHref }}>
+          Cast
+        </Link>
       </p>
       <p>
-        <Link to="reviews">Reviews</Link>
+        <Link to="reviews" state={{ from: backLinkHref }}>
+          Reviews
+        </Link>
       </p>
 
       <Outlet />

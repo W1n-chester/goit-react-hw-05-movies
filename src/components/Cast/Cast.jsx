@@ -9,11 +9,11 @@ const Cast = () => {
     fetchCast(movieId)
       .then(data => {
         setCastData(data.cast);
-        console.log(data.cast);
+        // console.log(data.cast);
       })
       .catch(err => console.log(err));
   }, [movieId]);
-    console.log(castData)
+    // console.log(castData)
   return (
     <>
       <p>CAST</p>

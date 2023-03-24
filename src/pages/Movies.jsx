@@ -20,7 +20,7 @@ const Movies = () => {
   return (
     <main>
       <Searchbar onSetSearchParams={setSearchParams} />
-      <h1>movies</h1>
+      {/* <h1>movies</h1> */}
       <MoviesList Movies={dataMovies} />
     </main>
   );

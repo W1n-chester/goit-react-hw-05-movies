@@ -8,11 +8,11 @@ const Reviews = () => {
     fetchReviews(movieId)
       .then(data => {
         setReviewsData(data.results);
-        console.log(data.results);
+        // console.log(data.results);
       })
       .catch(err => console.log(err));
   }, [movieId]);
-  console.log(reviewsData);
+  // console.log(reviewsData);
   return (
     <>
       <p>REVIEWS</p>
